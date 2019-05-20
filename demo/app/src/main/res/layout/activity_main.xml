@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tv_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="当前页面的广告位id:258592"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btn_splash"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="当前页面插屏互动广告" />
+
+    <Button
+        android:id="@+id/btn_jump_splash"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="跳转立即显示插屏广告" />
+
+
+    <Button
+        android:id="@+id/btn_jump_insert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="跳转嵌入式广告" />
+
+    <Button
+        android:id="@+id/btn_clean"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="清除缓存" />
+    <Button
+        android:id="@+id/btn_h5_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="h5测试" />
+</LinearLayout>

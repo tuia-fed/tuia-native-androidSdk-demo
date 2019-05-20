@@ -1,0 +1,74 @@
+ext {
+    kotlin = [kotlin_version  : "1.3.11",
+              core_ktx_version: "1.1.0-alpha03"]
+
+    android = [compileSdkVersion: 28,
+               suppotrSdkVersion: "28.0.0",
+               minSdkVersion    : 16,
+               targetSdkVersion : 28,
+               versionCode      : 100,
+               versionName      : "1.0.0"
+    ]
+    dependencies = [// ###### android library  start ######
+                    "multidex"                 : "com.android.support:multidex:1.0.3",
+                    "annotations"              : "com.android.support:support-annotations:${android["suppotrSdkVersion"]}",
+                    "support-v4"               : "com.android.support:support-v4:${android["suppotrSdkVersion"]}",
+                    "appcompat-v7"             : "com.android.support:appcompat-v7:${android["suppotrSdkVersion"]}",
+                    "support-v13"              : "com.android.support:support-v13:${android["suppotrSdkVersion"]}",
+                    "cardview-v7"              : "com.android.support:cardview-v7:${android["suppotrSdkVersion"]}",
+                    "recyclerview-v7"          : "com.android.support:recyclerview-v7:${android["suppotrSdkVersion"]}",
+                    "design"                   : "com.android.support:design:${android["suppotrSdkVersion"]}",
+                    "gridlayout-v7"            : "com.android.support:gridlayout-v7:${android["suppotrSdkVersion"]}",
+                    //constraintLayout
+                    "constraintLayout"         : "com.android.support.constraint:constraint-layout:1.1.3",
+                    // ###### android library  end ######
+
+//                    // ###### kotlin  start ######
+                    "kotlin-stdlib"            : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin["kotlin_version"]}",
+                    // Android KTX for framework API
+                    "core-ktx"                 : "androidx.core:core-ktx:${kotlin["core_ktx_version"]}",
+//                    // ###### kotlin  end ######
+
+                    //###### Android Components 组件化 start ######
+                    //https://developer.android.google.cn/topic/libraries/architecture/index.html
+                    "lifecycle-runtime"        : "android.arch.lifecycle:runtime:1.1.1",
+                    "lifecycle-compiler"       : "android.arch.lifecycle:compiler:1.1.1",
+                    "lifecycle-extensions"     : "android.arch.lifecycle:extensions:1.1.1",
+                    // alternatively, just ViewModel
+                    "lifecycle-viewmodel"      : "android.arch.lifecycle:viewmodel:1.1.1",
+                    // alternatively, just LiveData
+                    "lifecycle-livedata"       : "android.arch.lifecycle:livedata:1.1.1",
+                    // Java8 support for Lifecycles
+                    "lifecycle-common-java8"   : "android.arch.lifecycle:common-java8:1.1.1",
+                    // ReactiveStreams support for LiveData 支持rxjava
+                    "lifecycle-reactivestreams": "android.arch.lifecycle:reactivestreams:1.1.1",
+                    //用来测试
+                    "lifecycle-core-testing"   : "android.arch.core:core-testing:1.1.1",
+                    //###### Android Components 组件化 end ######
+
+
+                    // ###### leakcanary  start ######
+                    "leakcanary-android"       : "com.squareup.leakcanary:leakcanary-android:1.6.2",
+                    "leakcanary-fragment"      : 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.2',
+                    "leakcanary-android-no-op" : "com.squareup.leakcanary:leakcanary-android-no-op:1.6.2",
+                    //chrome 网络调试
+                    "stetho"                   : 'com.facebook.stetho:stetho:1.5.1',
+                    //wiki:https://github.com/orhanobut/dialogplus
+                    "dialogplus"               : 'com.orhanobut:dialogplus:1.11@aar',
+                    //wiki:https://github.com/li-xiaojun/XPopup
+                    'xpopup'                   : 'com.lxj:xpopup:1.7.5',
+                    "utilcode"                 : 'com.blankj:utilcode:1.23.7',
+                    "jsbridge"                 : 'com.github.lzyzsd:jsbridge:1.0.4',
+                    "fastjson"                 : "com.alibaba:fastjson:1.2.47",
+                    'okgo'                     : 'com.lzy.net:okgo:3.0.4',
+                    'rxandroid'                : 'io.reactivex.rxjava2:rxandroid:2.1.1',
+                    // ###### leakcanary  start ######
+                    "leakcanary-android"       : "com.squareup.leakcanary:leakcanary-android:1.6.2",
+                    "leakcanary-fragment"      : 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.2',
+                    "leakcanary-android-no-op" : "com.squareup.leakcanary:leakcanary-android-no-op:1.6.2",
+                    // ###### leakcanary  end ######
+
+
+    ]
+
+}
