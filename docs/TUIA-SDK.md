@@ -12,6 +12,15 @@
 
 1)添加远程仓库
 ```
+repositories {
+        google()
+        jcenter()
+        maven { url "https://raw.githubusercontent.com/tuia-fed/tuia-native-androidSdk/master" }
+      
+
+    }
+```
+```
 allprojects {
     repositories {
         google()
@@ -20,10 +29,14 @@ allprojects {
     }
 }
 ```
+
+建议将tuia创库放在repositories中的第一顺位，这样可以保证tuia的广告sdk率先加载
+
 2)项目中添加广告aar
 ```
-implementation 'com.tuia.ad:native_ad:1.0.0'
+implementation 'com.tuia.ad:native_ad:1.0.1'
 ```
+具体的版本号请参考：https://github.com/tuia-fed/tuia-native-androidSdk
 
 
 > 步骤二：Application广告配置初始化

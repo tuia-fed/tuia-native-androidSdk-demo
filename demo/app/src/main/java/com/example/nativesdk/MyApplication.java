@@ -2,7 +2,6 @@ package com.example.nativesdk;
 
 import android.app.Application;
 
-
 import com.tuia.ad.TuiaAdConfig;
 
 /**
