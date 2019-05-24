@@ -30,11 +30,13 @@ allprojects {
 }
 ```
 
-建议将tuia创库放在repositories中的第一顺位，这样可以保证tuia的广告sdk率先加载
+建议将tuia创库放在repositories中的第一顺位并打开翻墙工具，这样可以保证tuia的广告sdk率先加载。假如还是没有down下来，建议使用命令行试试。比如：
+windows：gradlew clean assembleDebug
+mac ：./gradlew lean assembleDebug
 
 2)项目中添加广告aar
 ```
-implementation 'com.tuia.ad:native_ad:1.0.1'
+implementation 'com.tuia.ad:native_ad:1.0.2'
 ```
 具体的版本号请参考：https://github.com/tuia-fed/tuia-native-androidSdk
 

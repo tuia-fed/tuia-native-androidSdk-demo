@@ -32,14 +32,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button buttonJumpSplash = findViewById(R.id.btn_jump_splash);
         Button buttonJumpInsert = findViewById(R.id.btn_jump_insert);
         Button buttonClean = findViewById(R.id.btn_clean);
-        Button buttonH5Test = findViewById(R.id.btn_h5_test);
         TextView tvId = findViewById(R.id.tv_id);
         tvId.setText("当前页面的广告位id:285730");
         buttonSplash.setOnClickListener(this);
         buttonJumpSplash.setOnClickListener(this);
         buttonJumpInsert.setOnClickListener(this);
         buttonClean.setOnClickListener(this);
-        buttonH5Test.setOnClickListener(this);
         //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         //线上
         //ad = new Ad("3qKwty87tP6VxztdZB3CWnT5aNty", "270000");
@@ -78,14 +76,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    //  清除 deviceId 缓存
-    public void clearCache(Context context) {
-        SharedPreferences pref = context.getSharedPreferences("tuiad", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.clear();
-        editor.apply();
-        Toast.makeText(context, "缓存清除成功，请重启app", Toast.LENGTH_LONG).show();
-    }
 
     @Override
     public void onClick(View v) {
@@ -103,9 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 SPUtils.getInstance().clear(true);
                 //startActivity(new Intent(MainActivity.this, WebViewActivity.class));
                 break;
-            case R.id.btn_h5_test:
-                startActivity(new Intent(MainActivity.this, WebViewActivity.class));
-                break;
+
             default:
                 break;
         }
