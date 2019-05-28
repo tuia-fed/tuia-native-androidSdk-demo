@@ -34,7 +34,7 @@ allprojects {
 
 windows：gradlew clean assembleDebug
 
-mac ：./gradlew lean assembleDebug
+mac ：./gradlew clean assembleDebug
 
 2)项目中添加广告aar
 ```
