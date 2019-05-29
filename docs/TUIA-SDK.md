@@ -178,7 +178,32 @@ ad.hide();
         android:roundIcon="@mipmap/ic_launcher_round"></application>
 ```
 android:networkSecurityConfig="@xml/tuia_network_security_config" 是重点。tuia_network_security_config文件已包含在aar包中，直接调用即可。
-##权限
+
+3、第三方库冲突解决
+本sdk中依赖的第三方库如下：
+
+appcompat-v7:28.0.0
+
+recyclerview-v7:28.0.0
+
+design:28.0.0
+
+jsbridge:1.0.4
+
+okhttp:3.8.1
+
+gson:2.8.2
+
+如果跟你的项目中的库发生冲突，请采用以下方式排除冲突，以support和gson为例：
+
+```
+implementation('com.tuia.ad:native_ad:1.0.3') {
+        exclude group: 'com.android.support'
+        exclude group: 'com.google.code.gson'
+    }
+```
+
+## 权限
 
 本广告SDK需要的动态权限为
 ```
