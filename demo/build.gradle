@@ -6,6 +6,8 @@ buildscript {
         google()
         jcenter()
         maven { url "https://raw.githubusercontent.com/tuia-fed/tuia-native-androidSdk/master" }
+        maven { url "https://github.com/tuia-fed/tuia-native-androidSdk/raw/master" }
+        maven { url "https://gitee.com/jtsky/tuia-native-androidSdk/raw/master" }
         maven { url 'https://maven.google.com/' }
         maven { url "https://jitpack.io" }
 
@@ -23,6 +25,8 @@ allprojects {
         google()
         jcenter()
         maven { url "https://raw.githubusercontent.com/tuia-fed/tuia-native-androidSdk/master" }
+        maven { url "https://github.com/tuia-fed/tuia-native-androidSdk/raw/master" }
+        maven { url "https://gitee.com/jtsky/tuia-native-androidSdk/raw/master" }
         maven { url "https://jitpack.io" }
         maven { url 'https://maven.google.com/' }
     }

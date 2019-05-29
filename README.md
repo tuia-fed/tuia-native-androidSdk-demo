@@ -38,11 +38,14 @@ allprojects {
 }
 ```
 
-建议将tuia创库放在repositories中的第一顺位并打开翻墙工具，这样可以保证tuia的广告sdk率先加载。假如还是没有down下来，建议使用命令行试试。比如：
+建议将tuia创库放在repositories中的第一顺位并打开翻墙工具VPN，这样可以保证tuia的广告sdk率先加载。假如还是没有down下来，建议使用命令行试试。比如：
 
 windows：gradlew clean assembleDebug
 
 mac ：./gradlew clean assembleDebug
+
+假如https://raw.githubusercontent.com/tuia-fed/tuia-native-androidSdk/master这个仓库不能down，请将仓库地址换成https://gitee.com/jtsky/tuia-native-androidSdk/raw/master试下
+
 
 2)项目中添加广告aar
 ```
