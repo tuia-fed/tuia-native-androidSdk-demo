@@ -68,8 +68,13 @@ dependencies {
     implementation rootProject.ext.dependencies["rxandroid"]
 //    debugImplementation rootProject.ext.dependencies["leakcanary-android"]
 //    releaseImplementation rootProject.ext.dependencies["leakcanary-android-no-op"]
+//    implementation ('com.tuia.ad:native_ad:1.0.3'){
+//        exclude group: "com.android.support"
+//        exclude group: "com.google.code.gson"
+//    }
+//    implementation 'com.android.support:appcompat-v7:26.1.0'
+//    implementation 'com.google.code.gson:gson:2.3.1'
     implementation 'com.tuia.ad:native_ad:1.0.3'
-
     //implementation project(':library_ad_comm')
 
     //implementation project(':library_ad_comm')
