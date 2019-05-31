@@ -16,8 +16,6 @@ repositories {
         google()
         jcenter()
         maven { url "https://raw.githubusercontent.com/tuia-fed/tuia-native-androidSdk/master" }
-      
-
     }
 ```
 ```
@@ -72,7 +70,7 @@ ad.init(activity,viewGroup);
 | slotId |  是  | string |  | 广告位id(需根据该id后台配置活动) |
 | deviceId |  否  | string |  UUID.randomUUID | 用户唯一身份标识 |
 | activity |  是  | Activity |   | 展示互动广告的activity |
-| viewGroup |  否 | LinearLayout | 全屏view | 展示互动广告的viewGroup viewGroup为空的情况下即为插屏广告否则即为嵌入式广告 |
+| viewGroup |  否 | FrameLayout | null | 展示互动广告的viewGroup viewGroup为空的情况下即为插屏广告否则即为嵌入式广告 |
 
 > 设置回调
 
