@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".InsertActivity">
 
     <TextView
         android:id="@+id/tv_id"
@@ -27,6 +27,6 @@
     <FrameLayout
         android:id="@+id/fl_ad_wrap"
         android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+        android:layout_height="220dp"/>
 
 </LinearLayout>

@@ -11,49 +11,74 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.WebStorage;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.tuia.ad.Ad;
-import com.tuia.ad_base.jsbridge.interfaces.AdCallBack;
+import com.tuia.ad.DefaultAdCallBack;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "MainActivity";
     private Ad ad = null;
 
+    public static String slotId = "285730";
+    public static String appkey = "3qKwty87tP6VxztdZB3CWnT5aNty";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Button buttonSplash = findViewById(R.id.btn_splash);
         Button buttonJumpSplash = findViewById(R.id.btn_jump_splash);
         Button buttonJumpInsert = findViewById(R.id.btn_jump_insert);
         Button buttonClean = findViewById(R.id.btn_clean);
-        TextView tvId = findViewById(R.id.tv_id);
-        tvId.setText("当前页面的广告位id:285730");
+
+        TextView tvSoltId = findViewById(R.id.tv_soltId);
+        tvSoltId.setText("当前页面的广告位id:" + slotId);
+
+        TextView tvAppkey = findViewById(R.id.tv_appkey);
+        tvAppkey.setText("当前页面的appkey:" + appkey);
         buttonSplash.setOnClickListener(this);
         buttonJumpSplash.setOnClickListener(this);
         buttonJumpInsert.setOnClickListener(this);
         buttonClean.setOnClickListener(this);
+
         //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         //线上
-        //ad = new Ad("3qKwty87tP6VxztdZB3CWnT5aNty", "270000");
-        ad = new Ad("3qKwty87tP6VxztdZB3CWnT5aNty", "285730");
-        //测试
-        //ad = new Ad("3xWBQRwCbh4J5NpomhxCWHrRx3pe", "258497");
-        ad.setCallBack(new AdCallBack() {
+        ad = new Ad(appkey, slotId);
+
+        ad.init(this, null, new DefaultAdCallBack() {
             @Override
-            public void close() {
-                Toast.makeText(getApplicationContext(), "这是一个关闭回调", Toast.LENGTH_LONG).show();
+            public void onActivityClose() {
+                ToastUtils.showShort("活动弹窗关闭");
             }
 
+            @Override
+            public void onActivityShow() {
+                super.onActivityShow();
+                ToastUtils.showShort("活动弹窗显示");
+            }
 
+            @Override
+            public void onRewardClose() {
+                ToastUtils.showShort("奖励弹窗关闭");
+            }
+
+            @Override
+            public void onRewardShow() {
+                super.onRewardShow();
+                ToastUtils.showShort("奖励弹窗显示");
+            }
         });
-        ad.init(this, null);
         getPermissions();
+
     }
 
     private void getPermissions() {
@@ -76,11 +101,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //  清除 deviceId 缓存
+    public void clearCache(Context context) {
+        SharedPreferences pref = context.getSharedPreferences("tuiad", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.clear();
+        editor.apply();
+        Toast.makeText(context, "缓存清除成功，请重启app", Toast.LENGTH_LONG).show();
+    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_splash:
+                //调用resetSlotId 重置广告位
+                //ad.resetSlotId("270000");
                 ad.show();
                 break;
             case R.id.btn_jump_splash:
@@ -91,6 +126,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_clean:
                 SPUtils.getInstance().clear(true);
+                //清楚webview缓存
+                WebStorage.getInstance().deleteAllData();
                 //startActivity(new Intent(MainActivity.this, WebViewActivity.class));
                 break;
 

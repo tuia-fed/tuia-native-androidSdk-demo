@@ -4,16 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/tv_id"
+        android:id="@+id/tv_soltId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="当前页面的广告位id:258592"
-        android:textSize="18sp" />
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_appkey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="当前页面的appkey:"
+        android:textSize="14sp" />
 
     <Button
         android:id="@+id/btn_splash"
@@ -39,9 +49,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="清除缓存" />
-    <!--<Button-->
-        <!--android:id="@+id/btn_h5_test"-->
+
+
+    <!--<EditText-->
+        <!--android:id="@+id/ed"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->
-        <!--android:text="h5测试" />-->
+        <!--android:layout_marginTop="250dp" />-->
 </LinearLayout>

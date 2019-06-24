@@ -24,8 +24,6 @@ repositories {
         google()
         jcenter()
         maven { url "https://raw.githubusercontent.com/tuia-fed/tuia-native-androidSdk/master" }
-      
-
     }
 ```
 ```
@@ -46,10 +44,9 @@ mac ：./gradlew clean assembleDebug
 
 假如https://raw.githubusercontent.com/tuia-fed/tuia-native-androidSdk/master这个仓库不能down，请将仓库地址换成https://gitee.com/jtsky/tuia-native-androidSdk/raw/master试下
 
-
 2)项目中添加广告aar
 ```
-implementation 'com.tuia.ad:native_ad:1.0.3'
+implementation 'com.tuia.ad:native_ad:1.0.4'
 ```
 具体的版本号请参考：https://github.com/tuia-fed/tuia-native-androidSdk
 
@@ -65,46 +62,58 @@ public class MyApplication extends Application {
 }
 ```
 
-> 步骤三：Activity中单个广告初始化
+> 步骤三：Activity中单个广告初始化(建议在onCreate生命周期中初始化)
 ```
 import com.tuia.ad.Ad;
-
-Ad ad = new Ad(appKey,slotId,deviceId);
-ad.init(activity,viewGroup);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    Ad ad = new Ad(appKey,slotId,deviceId);
+    ad.init(activity,viewGroup,AdCallBack);
+  }
 ```
+AdCallBack的默认实现为DefaultAdCallBack，已在sdk中实现可以直接调用。
 
 参数说明
 
 | 参数名 | 必填 | 类型   | 默认值 |          描述               |
 | ------ | :--: | ------ | --------- | ------------------ |
 | appKey |  是  | string |  | 系统分配的加密字段 |
-| slotId |  是  | string |  | 广告位id(需根据该id后台配置活动) |
+| slotId |  是  | string（可空） |  | 广告位id(需根据该id后台配置活动) |
 | deviceId |  否  | string |  UUID.randomUUID | 用户唯一身份标识 |
 | activity |  是  | Activity |   | 展示互动广告的activity |
 | viewGroup |  否 | FrameLayout | null | 展示互动广告的viewGroup viewGroup为空的情况下即为插屏广告否则即为嵌入式广告 |
+| AdCallBack | 否 | AdCallBack | null|弹窗行为回调 包括show 和dismiss |
 
-> 设置回调
+> 步骤三 设置soltId (不是必须的 slotId可以在new Ad()时初始化，resetSlotId()方法的作用主要是方便某些媒体需要根据后端接口动态配置广告位Id)
 
-此回调只针对插屏广告有效
 ```
-ad.setCallBack(new AdCallBack() {
-            @Override
-            public void close() {
-                //完全关闭插屏广告时回调
-            }
-        });
+ad.resetSlotId(slotId)
 ```
 
-
- 
-
-> 步骤三 点击某个按钮展示广告或者进入页面直接展现广告
+> 步骤四 点击某个按钮展示广告或者进入页面直接展现广告
 
 ```
 ad.show()
 ```
 
 ## 接口说明
+>new Ad(appKey,slotId,deviceId)
+
+初始化Ad对象，其中appKey为必填选项，deviceId可以为空。slotId可以为空或者申请默认广告位。假如初始化slotId为空，必须在展现广告前通过resetSlotId方法设置广告位id。
+
+appKey和slotId请联系推啊对接人员获取。
+
+>ad.init(activity,viewGroup,AdCallBack)
+
+其中viewGroup可以为空，假如viewGroup为空则sdk默认展现dialog类型广告，否则展现嵌入在你指定布局文件中的嵌入式广告。AdCallBack则为弹窗的行为回调包括show和dismiss
+
+>resetSlotId 重置广告位id
+
+```
+ad.resetSlotId(slotId)
+```
+
+针对需要通过接口动态下发广告位的媒体
 
 > show 展示互动广告
 
@@ -172,7 +181,7 @@ ad.hide();
 
 ## 兼容性
 
-1、android  minSdkVersion=16
+1、android  minSdkVersion=14
 
 2、Google表示，为保证用户数据和设备的安全，针对下一代 Android 系统(Android P) 的应用程序，将要求默认使用加密连接，这意味着 Android P 将禁止 App 使用所有未加密的连接，因此运行 Android P 系统的安卓设备无论是接收或者发送流量，未来都不能明码传输，需要使用下一代(Transport Layer Security)传输层安全协议，而 Android Nougat 和 Oreo 则不受影响。假如你的应用已经适配Android 9.0，即targetSdkVersion=28，为使广告SDK正常使用，请务必进行http的适配。以下两种解决方案提供参考：
 1）参考文档：https://www.cnblogs.com/renhui/p/9921790.html
@@ -191,26 +200,22 @@ android:networkSecurityConfig="@xml/tuia_network_security_config" 是重点。tu
 3、第三方库冲突解决
 本sdk中依赖的第三方库如下：
 
-appcompat-v7:28.0.0
+com.android.support:***:28.0.0
 
-recyclerview-v7:28.0.0
-
-design:28.0.0
-
-jsbridge:1.0.4
-
-okhttp:3.8.1
+okhttp:3.14.2
 
 gson:2.8.2
 
-如果跟你的项目中的库发生冲突，请采用以下方式排除冲突，以support和gson为例：
+
+如果跟你的项目中的第三方库发生版本冲突，请采用以下方式排除冲突，以support和gson为例：
 
 ```
-implementation('com.tuia.ad:native_ad:1.0.3') {
+implementation('com.tuia.ad:native_ad:1.0.4') {
         exclude group: 'com.android.support'
         exclude group: 'com.google.code.gson'
     }
 ```
+
 ## 权限
 
 本广告SDK需要的动态权限为
@@ -220,6 +225,167 @@ Manifest.permission.WRITE_EXTERNAL_STORAGE
 Manifest.permission.READ_EXTERNAL_STORAGE
 ```
 针对6.0及以上系统如果不赋予以上动态权限 则会影响正常的下载和安装apk
+
+## 混淆 
+
+如果你的app采用的是第三方加固 可以不用添加混淆文件
+假如需要自定义混淆 参考如下： 
+```
+# Add project specific ProGuard rules here.
+# You can control the set of applied configuration files using the
+# proguardFiles setting in build.gradle.
+#
+# For more details, see
+#   http://developer.android.com/guide/developing/tools/proguard.html
+
+# If your project uses WebView with JS, uncomment the following
+# and specify the fully qualified class name to the JavaScript interface
+# class:
+#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+#   public *;
+#}
+
+# Uncomment this to preserve the line number information for
+# debugging stack traces.
+#-keepattributes SourceFile,LineNumberTable
+
+# If you keep the line number information, uncomment this to
+# hide the original source file name.
+#-renamesourcefileattribute SourceFile
+#-------------------------------------------定制化区域----------------------------------------------
+#---------------------------------1.推啊广告---------------------------------
+
+-keep class com.tuia.ad_base.** { *; }
+
+-keep class com.tuia.ad.** { *; }
+
+#-------------------------------------------------------------------------
+
+#---------------------------------2.第三方包-------------------------------
+
+#okhttp
+-dontwarn okhttp3.**
+-keep class okhttp3.**{*;}
+
+#okio
+-dontwarn okio.**
+-keep class okio.**{*;}
+
+#gson
+-keep public class com.google.gson.**
+-keep public class com.google.gson.** {public private protected *;}
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep class sun.misc.Unsafe { *; }
+
+
+#androidUtil
+-keep class com.blankj.utilcode.**{*; }
+
+#json
+-keep class org.json.** { *; }
+
+
+#-------------------------------------------------------------------------
+
+#---------------------------------3.与js互相调用的类------------------------
+
+
+#-------------------------------------------------------------------------
+
+#---------------------------------4.反射相关的类和方法-----------------------
+
+
+
+#----------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------
+
+#-------------------------------------------基本不用动区域--------------------------------------------
+#---------------------------------基本指令区----------------------------------
+-optimizationpasses 5
+-dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
+-dontskipnonpubliclibraryclassmembers
+-dontpreverify
+-verbose
+-printmapping proguardMapping.txt
+-optimizations !code/simplification/cast,!field/*,!class/merging/*
+-keepattributes *Annotation*,InnerClasses
+-keepattributes Signature
+-keepattributes SourceFile,LineNumberTable
+#----------------------------------------------------------------------------
+
+#---------------------------------默认保留区---------------------------------
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends android.preference.Preference
+-keep public class * extends android.view.View
+-keep public class com.android.vending.licensing.ILicensingService
+-keep class android.support.** {*;}
+
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+-keepclassmembers class * extends android.app.Activity{
+    public void *(android.view.View);
+}
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+-keep public class * extends android.view.View{
+    *** get*();
+    void set*(***);
+    public <init>(android.content.Context);
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+}
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;
+    private static final java.io.ObjectStreamField[] serialPersistentFields;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+    java.lang.Object writeReplace();
+    java.lang.Object readResolve();
+}
+-keep class **.R$* {
+ *;
+}
+-keepclassmembers class * {
+    void *(**On*Event);
+}
+#----------------------------------------------------------------------------
+
+#---------------------------------webview------------------------------------
+-keepclassmembers class fqcn.of.javascript.interface.for.Webview {
+   public *;
+}
+-keepclassmembers class * extends android.webkit.WebViewClient {
+    public void *(android.webkit.WebView, java.lang.String, android.graphics.Bitmap);
+    public boolean *(android.webkit.WebView, java.lang.String);
+}
+-keepclassmembers class * extends android.webkit.WebViewClient {
+    public void *(android.webkit.WebView, jav.lang.String);
+}
+#----------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------
+
+
+
+```
+
+
 
 ## 补充说明
 

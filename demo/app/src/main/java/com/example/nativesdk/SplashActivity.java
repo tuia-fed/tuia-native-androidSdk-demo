@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.tuia.ad.Ad;
-import com.tuia.ad_base.jsbridge.interfaces.AdCallBack;
+import com.tuia.ad.DefaultAdCallBack;
 
 
 public class SplashActivity extends AppCompatActivity {
@@ -24,14 +24,22 @@ public class SplashActivity extends AppCompatActivity {
         ad = new Ad("3qKwty87tP6VxztdZB3CWnT5aNty", "285746");
         //测试
         //ad = new Ad("3xWBQRwCbh4J5NpomhxCWHrRx3pe", "258497");
-        ad.setCallBack(new AdCallBack() {
+        ad.init(this, null, new DefaultAdCallBack() {
             @Override
-            public void close() {
-                Toast.makeText(getApplicationContext(), "这是一个关闭回调", Toast.LENGTH_LONG).show();
+            public void onActivityClose() {
+                ToastUtils.showShort("活动弹窗关闭");
             }
 
+            @Override
+            public void onRewardClose() {
+                ToastUtils.showShort("奖励弹窗关闭");
+            }
+
+            @Override
+            public void onPrizeClose() {
+                ToastUtils.showShort("我的奖品弹窗关闭");
+            }
         });
-        ad.init(this, null);
         ad.show();
     }
 
@@ -41,7 +49,6 @@ public class SplashActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         ad.resetAdSize(newConfig.orientation);
     }
-
 
 
     @Override
