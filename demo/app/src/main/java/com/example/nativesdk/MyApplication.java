@@ -20,6 +20,5 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         TuiaAdConfig.init(this);
-        //LeakCanary install
     }
 }

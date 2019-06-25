@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         //线上
-        ad = new Ad(appkey, slotId);
+        ad = new Ad(appkey, slotId, "jint");
 
         ad.init(this, null, new DefaultAdCallBack() {
             @Override
@@ -114,8 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_splash:
-                //调用resetSlotId 重置广告位
-                //ad.resetSlotId("270000");
+                //ad.resetSlotId(slotId);
                 ad.show();
                 break;
             case R.id.btn_jump_splash:

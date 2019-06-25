@@ -17,7 +17,7 @@ public class InsertActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private Ad ad = null;
     private FrameLayout mFlAdWrap;
-    public static String slotId = "285732";
+    public static String slotId = "285731";
     public static String appkey = "3qKwty87tP6VxztdZB3CWnT5aNty";
 
 

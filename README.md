@@ -46,7 +46,7 @@ mac ：./gradlew clean assembleDebug
 
 2)项目中添加广告aar
 ```
-implementation 'com.tuia.ad:native_ad:1.0.4'
+implementation 'com.tuia.ad:native_ad:1.0.4.1'
 ```
 具体的版本号请参考：https://github.com/tuia-fed/tuia-native-androidSdk
 
@@ -67,7 +67,7 @@ public class MyApplication extends Application {
 import com.tuia.ad.Ad;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    Ad ad = new Ad(appKey,slotId,deviceId);
+    Ad ad = new Ad(appKey,slotId, userId,deviceId);
     ad.init(activity,viewGroup,AdCallBack);
   }
 ```
@@ -77,8 +77,9 @@ AdCallBack的默认实现为DefaultAdCallBack，已在sdk中实现可以直接�
 
 | 参数名 | 必填 | 类型   | 默认值 |          描述               |
 | ------ | :--: | ------ | --------- | ------------------ |
-| appKey |  是  | string |  | 系统分配的加密字段 |
-| slotId |  是  | string（可空） |  | 广告位id(需根据该id后台配置活动) |
+| appKey |  是  | string | 000000 | 系统分配的加密字段 |
+| slotId |  是  | string（可空） | 000000 | 广告位id(需根据该id后台配置活动) |
+| userId |  否  | string |  deviceId | 媒体端对接虚拟奖品是需要设置 |
 | deviceId |  否  | string |  UUID.randomUUID | 用户唯一身份标识 |
 | activity |  是  | Activity |   | 展示互动广告的activity |
 | viewGroup |  否 | FrameLayout | null | 展示互动广告的viewGroup viewGroup为空的情况下即为插屏广告否则即为嵌入式广告 |
@@ -97,9 +98,11 @@ ad.show()
 ```
 
 ## 接口说明
->new Ad(appKey,slotId,deviceId)
+>new Ad(appKey,slotId)
+>new Ad(appKey,slotId,userId)
+>new Ad(appKey,slotId,userId,deviceId)
 
-初始化Ad对象，其中appKey为必填选项，deviceId可以为空。slotId可以为空或者申请默认广告位。假如初始化slotId为空，必须在展现广告前通过resetSlotId方法设置广告位id。
+初始化Ad对象，其中appKey为必填选项,slotId可以为空或者申请默认广告位。假如初始化slotId为空，必须在展现广告前通过resetSlotId方法设置广告位id。userId当用户需要对接虚拟奖品并且有用户体系时可以传，不传的时候默认userId等于deviceId，deviceId可以为空，sdk内部根据UUID自动分配。
 
 appKey和slotId请联系推啊对接人员获取。
 
