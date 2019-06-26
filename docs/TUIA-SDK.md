@@ -63,6 +63,42 @@ import com.tuia.ad.Ad;
     ad.init(activity,viewGroup,AdCallBack);
   }
 ```
+AdCallBack的注释如下
+```
+public interface AdCallBack {
+    /**
+     * 活动弹窗关闭回调 只针对弹窗类型广告有效
+     */
+    void onActivityClose();
+
+    /**
+     * 活动弹窗show回调 只针对弹窗类型广告有效
+     */
+    void onActivityShow();
+
+    /**
+     * 奖励弹窗关闭回调
+     */
+    void onRewardClose();
+
+    /**
+     * 奖励弹窗show回调
+     */
+    void onRewardShow();
+
+    /**
+     * 我的奖品页弹窗关闭回调
+     */
+    void onPrizeClose();
+
+    /**
+     * 我的奖品页弹窗show回调
+     */
+    void onPrizeShow();
+
+}
+```
+
 AdCallBack的默认实现为DefaultAdCallBack，已在sdk中实现可以直接调用。
 
 参数说明
