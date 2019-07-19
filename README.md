@@ -46,7 +46,7 @@ mac ：./gradlew clean assembleDebug
 
 2)项目中添加广告aar
 ```
-implementation 'com.tuia.ad:native_ad:1.0.4.3'
+implementation 'com.tuia.ad:native_ad:1.0.4.4'
 ```
 具体的版本号请参考：https://github.com/tuia-fed/tuia-native-androidSdk
 
