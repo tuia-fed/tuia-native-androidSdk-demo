@@ -34,11 +34,15 @@ windows：gradlew clean assembleDebug
 
 mac ：./gradlew clean assembleDebug
 
-假如https://raw.githubusercontent.com/tuia-fed/tuia-native-androidSdk/master这个仓库不能down，请将仓库地址换成https://gitee.com/jtsky/tuia-native-androidSdk/raw/master试下
+假如
+https://raw.githubusercontent.com/tuia-fed/tuia-native-androidSdk/master
+这个仓库不能down，请将仓库地址换成
+https://gitee.com/jtsky/tuia-native-androidSdk/raw/master
+试下
 
 2)项目中添加广告aar
 ```
-implementation 'com.tuia.ad:native_ad:1.0.4.4'
+implementation 'com.tuia.ad:native_ad:1.0.4.5'
 ```
 具体的版本号请参考：https://github.com/tuia-fed/tuia-native-androidSdk
 
@@ -216,6 +220,7 @@ ad.hide();
 
 2、Google表示，为保证用户数据和设备的安全，针对下一代 Android 系统(Android P) 的应用程序，将要求默认使用加密连接，这意味着 Android P 将禁止 App 使用所有未加密的连接，因此运行 Android P 系统的安卓设备无论是接收或者发送流量，未来都不能明码传输，需要使用下一代(Transport Layer Security)传输层安全协议，而 Android Nougat 和 Oreo 则不受影响。假如你的应用已经适配Android 9.0，即targetSdkVersion=28，为使广告SDK正常使用，请务必进行http的适配。以下两种解决方案提供参考：
 1）参考文档：https://www.cnblogs.com/renhui/p/9921790.html
+
 2）
 ```
 <application
