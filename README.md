@@ -50,7 +50,7 @@ https://gitee.com/jtsky/tuia-native-androidSdk/raw/master
 
 2)项目中添加广告aar
 ```
-implementation 'com.tuia.ad:native_ad:1.0.4.5'
+implementation 'com.tuia.ad:native_ad:1.0.4.7'
 ```
 具体的版本号请参考：https://github.com/tuia-fed/tuia-native-androidSdk
 
@@ -254,7 +254,7 @@ gson:2.8.2
 如果跟你的项目中的第三方库发生版本冲突，请采用以下方式排除冲突，以support和gson为例：
 
 ```
-implementation('com.tuia.ad:native_ad:1.0.4') {
+implementation('com.tuia.ad:native_ad:1.0.7') {
         exclude group: 'com.android.support'
         exclude group: 'com.google.code.gson'
     }
