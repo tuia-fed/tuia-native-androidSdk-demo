@@ -50,7 +50,7 @@ https://gitee.com/jtsky/tuia-native-androidSdk/raw/master
 
 2)项目中添加广告aar
 ```
-implementation 'com.tuia.ad:native_ad:1.0.4.7'
+implementation 'com.tuia.ad:native_ad:1.0.8.0'
 ```
 具体的版本号请参考：https://github.com/tuia-fed/tuia-native-androidSdk
 
